@@ -1,0 +1,7 @@
+name,text
+excelalias1,(priority (series "realised" #:prune 2) (series "nomination" #:prune 1) (series "forecast"))
+excelalias2,(priority (series "1234") (series "6543"))
+excelalias3,(priority (* 1000 (series "prems" #:prune 2)) (series "deuz" #:prune 1) (* 0.001 (series "troiz")))
+excelaliasrevision,(priority (series "ts_through_time") (series "ts_constant"))
+excelalias4,(priority (* 8 (series "rep1")) (* 11 (series "rep2")))
+excelaliassum1,(add (series "rep1") (* 11 (series "rep2")))
