@@ -70,7 +70,7 @@ def xl_addin(action, name=None):
     elif action == 'uninstall-any':
         if name is None:
             raise Exception('An excel addin name must be given')
-        addin_remove(name)    
+        addin_remove(name)
 
 
 @click.command('xl')
@@ -92,4 +92,3 @@ def xl(action, xl_path, tab=None):
             macro_push_tab(xl_path, tab)
 
     print('Operation done in %s seconds' %(time.time() - start))
- 
