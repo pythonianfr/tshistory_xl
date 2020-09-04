@@ -40,7 +40,8 @@ FILL_TRAIL = 'f'   # for filling the last values with the previous
 MONTH = '_month_'  # tagged values must be unfolded daily for a whole month
 IGNORE = 'ignore'  # whole name, column will be ignored (equivalent to no name)
 
-CFG_SHEET = '_SATURN_CFG'
+CFG_SHEET = 'TSHISTORY_CFG'
+OLD_CFG_SHEET = '_SATURN_CFG'
 MODE = 'mode'
 READ_ONLY = 'ro'
 NA = 'na'
@@ -821,9 +822,15 @@ def get_webapi_uri(wb):
     try:
         df_cfg = pd.DataFrame(wb.sheets[CFG_SHEET].range((1, 1), (10, 10)).value)
     except:
-        raise Exception('No {} sheet in {}'.format(CFG_SHEET, wb.name))
+        try:
+            df_cfg = pd.DataFrame(wb.sheets[OLD_CFG_SHEET].range((1, 1), (10, 10)).value)
+        except:
+            raise Exception(
+                f'No {CFG_SHEET} or {OLD_CFG_SHEET} sheet in {wb.name}'
+            )
+
     if 'webapi' not in df_cfg.iloc[:, 0].tolist():
-        raise Exception(f'You must specified in {CFG_SHEET}: webapi | www.saturnurl.net')
+        raise Exception(f'You must specify in {CFG_SHEET}: webapi | http://your.tshistory.net')
     coord_uri_api = (
         np.where(df_cfg == 'webapi')[0][0],
         np.where(df_cfg == 'webapi')[1][0] + 1

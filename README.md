@@ -164,7 +164,7 @@ $ tsh xl-addin uninstall --pyxll
 ## Base use
 
 On a brand new Excel sheet, you need initially a tab named
-`_SATURN_CFG`, which must contain:
+`TSHISTORY_CFG`, which must contain:
 
 * in A1: `webapi`
 * in B1: http://uri-of-the-tshistory-instance
