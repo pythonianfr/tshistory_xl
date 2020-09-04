@@ -6,7 +6,6 @@ deps = [
     'pandas',
     'colorlover',
     'requests',
-    'xmltodict',
     'python-dateutil',
     'isodate',
 ]
