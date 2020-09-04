@@ -8,6 +8,9 @@ deps = [
     'requests',
     'python-dateutil',
     'isodate',
+    'tshistory',
+    'tshistory_formula',
+    'tshistory_supervision'
 ]
 
 if os.name == 'nt':
