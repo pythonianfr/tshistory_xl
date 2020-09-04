@@ -1,5 +1,9 @@
 import os
+from pathlib import Path
 from setuptools import setup
+
+
+doc = Path(__file__).parent / 'README.md'
 
 
 deps = [
@@ -22,6 +26,8 @@ setup(name='tshistory_xl',
       author='Pythonian',
       author_email='arnaud.campeas@pythonian.fr, aurelien.campeas@pythonian.fr',
       description='Light client for excel/tshistory',
+      long_description=doc.read_text(),
+      long_description_content_type='text/markdown',
       packages=['tshistory_xl'],
       install_requires=deps,
       entry_points={
