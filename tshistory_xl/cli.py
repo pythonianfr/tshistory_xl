@@ -16,19 +16,19 @@ from tshistory_xl.excel_connect import (
 # copy paste and changed from xlwings.command_line
 
 # Directories/paths
-file_path = Path(__file__).absolute().parents[1] / 'ZTSHISTORY.xlam'
+XLAM = Path(__file__).parent / 'ZTSHISTORY.xlam'
 
 if sys.platform.startswith('win'):
-    addin_path = Path(os.getenv('APPDATA')) / 'Microsoft'/ 'Excel'/ 'XLSTART'
+    ADDINPATH = Path(os.getenv('APPDATA')) / 'Microsoft'/ 'Excel'/ 'XLSTART'
 
 
 def addin_install():
     if not sys.platform.startswith('win'):
         print("Cannot install the addin automatically on Mac. Install it via Tools > Excel Add-ins...")
-        print("You find the addin here: {0}".format(file_path))
+        print("You find the addin here: {0}".format(XLAM))
     else:
         try:
-            shutil.copyfile(file_path, addin_path / 'ZTSHISTORY.xlam')
+            shutil.copyfile(XLAM, ADDINPATH / 'ZTSHISTORY.xlam')
             print('Successfully installed the tshistory_xl add-in! Please restart Excel.')
         except IOError as e:
             if e.args[0] == 13:
@@ -44,7 +44,7 @@ def addin_remove(name='ZTSHISTORY.xlam'):
         print('Error: This command is not available on Mac. Please remove the addin manually.')
     else:
         try:
-            os.remove(addin_path / name)
+            os.remove(ADDINPATH / name)
             print('Successfully removed the tshistory_xl add-in!')
         except WindowsError as e:
             if e.args[0] == 32:

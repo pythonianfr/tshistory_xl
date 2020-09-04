@@ -29,6 +29,10 @@ setup(name='tshistory_xl',
       long_description=doc.read_text(),
       long_description_content_type='text/markdown',
       packages=['tshistory_xl'],
+      zip_safe=False,
+      package_data={'tshistory_xl': [
+          'ZTSHISTORY.xlam',
+      ]},
       install_requires=deps,
       entry_points={
           'tshistory.subcommands': [
