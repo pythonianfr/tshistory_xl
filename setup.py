@@ -26,5 +26,15 @@ setup(name='tshistory_xl',
               'xl-addin=tshistory_xl.cli:xl_addin',
               'xl=tshistory_xl.cli:xl',
           ],
-      }
+      },
+      classifiers=[
+          'Development Status :: 4 - Beta',
+          'Intended Audience :: Developers',
+          'License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)',
+          'Operating System :: OS Independent',
+          'Programming Language :: Python :: 3',
+          'Topic :: Database',
+          'Topic :: Scientific/Engineering',
+          'Topic :: Software Development :: Version Control'
+      ]
 )
