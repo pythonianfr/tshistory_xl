@@ -22,7 +22,7 @@ if os.name == 'nt':
 
 
 setup(name='tshistory_xl',
-      version='0.1.0',
+      version='0.1.1',
       author='Pythonian',
       author_email='arnaud.campeas@pythonian.fr, aurelien.campeas@pythonian.fr',
       description='Light client for excel/tshistory',
