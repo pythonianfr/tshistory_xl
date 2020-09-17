@@ -4,10 +4,17 @@
 
 This is an Excel client for [tshistory][tshistory].
 
+## Removing the old versions
+
+```sh
+pip uninstall xl_data_hub
+```
+
 ## Installation
 
 ```sh
 pip install tshistory_xl
+pip install xlwings
 ```
 
 Close Excel.
@@ -23,6 +30,12 @@ $ tsh xl-addin install
 In Excel you should see two new tabs: `xlwings` and `Saturn`.
 
 [tshistory]: https://hg.sr.ht/~pythonian/tshistory
+
+If you have to uninstall the old proprietary version, do
+
+```sh
+tsh xl-addin uninstall-any --name ZATURN.xlam
+```
 
 ## Base use
 
