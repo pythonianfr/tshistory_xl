@@ -13,8 +13,6 @@ from tshistory_xl.excel_connect import (
     macro_push_tab,
 )
 
-# copy paste and changed from xlwings.command_line
-
 # Directories/paths
 XLAM = Path(__file__).parent / 'ZTSHISTORY.xlam'
 
@@ -24,15 +22,20 @@ if sys.platform.startswith('win'):
 
 def addin_install():
     if not sys.platform.startswith('win'):
-        print("Cannot install the addin automatically on Mac. Install it via Tools > Excel Add-ins...")
-        print("You find the addin here: {0}".format(XLAM))
+        print('Cannot install the addin automatically on Mac. ')
+        print('Install it via Tools > Excel Add-ins...')
+        print(f'You find the addin here: {XLAM}')
     else:
         try:
             shutil.copyfile(XLAM, ADDINPATH / 'ZTSHISTORY.xlam')
-            print('Successfully installed the tshistory_xl add-in! Please restart Excel.')
+            print(
+                'Successfully installed the tshistory_xl add-in! '
+                'Please restart Excel.'
+            )
         except IOError as e:
             if e.args[0] == 13:
-                print('Error: Failed to install the add-in: If Excel is running, quit Excel and try again.')
+                print('Error: Failed to install the add-in: '
+                      'If Excel is running, quit Excel and try again.')
             else:
                 print(str(e))
         except Exception as e:
@@ -41,22 +44,24 @@ def addin_install():
 
 def addin_remove(name='ZTSHISTORY.xlam'):
     if not sys.platform.startswith('win'):
-        print('Error: This command is not available on Mac. Please remove the addin manually.')
+        print('Error: This command is not available on Mac. '
+              'Please remove the addin manually.')
     else:
         try:
             os.remove(ADDINPATH / name)
             print('Successfully removed the tshistory_xl add-in!')
         except WindowsError as e:
             if e.args[0] == 32:
-                print('Error: Failed to remove the add-in: If Excel is running, quit Excel and try again.')
+                print('Error: Failed to remove the add-in: '
+                      'If Excel is running, quit Excel and try again.')
             elif e.args[0] == 2:
-                print("Error: Could not remove the add-in. The add-in doesn't seem to be installed.")
+                print("Error: Could not remove the add-in. "
+                      "The add-in doesn't seem to be installed.")
             else:
                 print(str(e))
         except Exception as e:
             print(str(e))
 
-# end copy/paste
 
 @click.command('xl-addin')
 @click.argument('action',
