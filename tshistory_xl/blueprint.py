@@ -68,23 +68,21 @@ def blueprint(tsa):
         output = []
         errors = []
 
-        with yield_engine(dburi) as engine:
+        def get(zonename, seriename, items):
+            try:
+                base, origin, marker = tsa.values_markers_origins(**items)
+                output.append(
+                    (zonename, seriename, items['revision_date'],
+                     (base, origin, marker))
+                )
+            except Exception:
+                errors.append((items['name'], tb.format_exc()))
 
-            def get(zonename, seriename, items):
-                try:
-                    base, origin, marker = tsa.values_markers_origins(**items)
-                    output.append(
-                        (zonename, seriename, items['revision_date'],
-                         (base, origin, marker))
-                    )
-                except Exception:
-                    errors.append((items['name'], tb.format_exc()))
-
-            poolrun(
-                get,
-                [(zonename, seriename, items)
-                 for zonename, seriename, items in inputlist]
-            )
+        poolrun(
+            get,
+            [(zonename, seriename, items)
+             for zonename, seriename, items in inputlist]
+        )
 
         print('get_many done in %s seconds' % (time.time() - start))
         if not len(errors):
