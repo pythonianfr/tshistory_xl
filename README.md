@@ -18,8 +18,11 @@ pip install xlwings
 ```
 
 Close Excel.
+Make sure that xlwings is registered:
 
-Make sure that xlwings is registered (`xlwings addin install`).
+```sh
+xlwings addin install
+```
 
 Then type:
 
