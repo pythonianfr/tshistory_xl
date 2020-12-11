@@ -6,23 +6,12 @@ from setuptools import setup
 doc = Path(__file__).parent / 'README.md'
 
 
-deps = [
-    'pandas',
-    'colorlover',
-    'requests',
-    'python-dateutil',
-    'isodate',
-    'tshistory',
-    'tshistory_formula',
-    'tshistory_supervision'
-]
-
 if os.name == 'nt':
     deps.append('xlwings ~= 0.20')
 
 
 setup(name='tshistory_xl',
-      version='0.1.1',
+      version='0.2.0',
       author='Pythonian',
       author_email='arnaud.campeas@pythonian.fr, aurelien.campeas@pythonian.fr',
       description='Light client for excel/tshistory',
@@ -33,7 +22,16 @@ setup(name='tshistory_xl',
       package_data={'tshistory_xl': [
           'ZTSHISTORY.xlam',
       ]},
-      install_requires=deps,
+      install_requires=[
+          'pandas',
+          'colorlover',
+          'requests',
+          'python-dateutil',
+          'isodate',
+          'tshistory',
+          'tshistory_formula',
+          'tshistory_supervision'
+      ],
       entry_points={
           'tshistory.subcommands': [
               'xl-addin=tshistory_xl.cli:xl_addin',
