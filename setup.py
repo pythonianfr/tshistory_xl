@@ -5,6 +5,16 @@ from setuptools import setup
 
 doc = Path(__file__).parent / 'README.md'
 
+deps = [
+    'pandas',
+    'colorlover',
+    'requests',
+    'python-dateutil',
+    'isodate',
+    'tshistory',
+    'tshistory_formula',
+    'tshistory_supervision'
+]
 
 if os.name == 'nt':
     deps.append('xlwings ~= 0.20')
@@ -22,16 +32,7 @@ setup(name='tshistory_xl',
       package_data={'tshistory_xl': [
           'ZTSHISTORY.xlam',
       ]},
-      install_requires=[
-          'pandas',
-          'colorlover',
-          'requests',
-          'python-dateutil',
-          'isodate',
-          'tshistory',
-          'tshistory_formula',
-          'tshistory_supervision'
-      ],
+      install_requires=deps,
       entry_points={
           'tshistory.subcommands': [
               'xl-addin=tshistory_xl.cli:xl_addin',
