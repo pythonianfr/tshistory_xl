@@ -1,8 +1,9 @@
-from tshistory.util import extend
+from tshistory.util import ensuretz, extend
 from tshistory.api import (
     altsources,
     dbtimeseries
 )
+
 
 @extend(dbtimeseries)
 def values_markers_origins(
@@ -12,6 +13,8 @@ def values_markers_origins(
         from_value_date=None,
         to_value_date=None,
         delta=None):
+
+    revision_date = ensuretz(revision_date)
 
     with self.engine.begin() as cn:
         if self.tsh.exists(cn, name):
