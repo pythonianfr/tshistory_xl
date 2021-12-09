@@ -1,11 +1,15 @@
+from psyl import lisp
+
 from tshistory_supervision.tsio import timeseries as supervisionts
-from tshistory_formula import interpreter
 from tshistory_formula.tsio import timeseries as formulats
+from tshistory_formula import interpreter
 
 # registration
 import tshistory_formula.funcs
 import tshistory_formula.api
+
 import tshistory_supervision.api
+
 import tshistory_xl.api
 import tshistory_xl.funcs
 
@@ -14,18 +18,17 @@ class timeseries(supervisionts, formulats):
     _forbidden_chars = ' (),;=[]'
     metadata_compat_excluded = ('supervision_status',)
 
-    def update(self, cnx, ts, name, author, manual=False,
+    def update(self, cn, ts, name, author,
                metadata=None,
-               insertion_date=None):
+               insertion_date=None,
+               manual=False):
         name = self._sanitize(name)
-        diff = super().update(
-            cnx, ts, name, author,
-            manual=manual,
+        return super().update(
+            cn, ts, name, author,
             metadata=metadata,
-            insertion_date=insertion_date
+            insertion_date=insertion_date,
+            manual=manual
         )
-
-        return diff
 
     def get_many(self, cn, name,
                  revision_date=None,
@@ -51,7 +54,7 @@ class timeseries(supervisionts, formulats):
                     'to_value_date':to_value_date
                 }
             )
-            ts_values, ts_origins = i.evaluate(formula)
+            ts_values, ts_origins = i.evaluate(lisp.parse(formula))
             ts_values.name = name
             ts_origins.name = name
             return ts_values, ts_marker, ts_origins
