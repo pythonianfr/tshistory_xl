@@ -9,16 +9,15 @@ from flask_restx import (
     Resource,
     reqparse
 )
-from tshistory import util
 
-from tshistory_client.api import (
+from tshistory import util
+from tshistory.http.client import (
     Client,
     strft,
     unwraperror
 )
-from tshistory_rest.blueprint import httpapi
-
-from tshistory_rest.util import (
+from tshistory.http.server import httpapi
+from tshistory.http.util import (
     enum,
     onerror,
     utcdt
