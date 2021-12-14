@@ -9,7 +9,6 @@ import webtest
 from flask import Flask
 
 from pytest_sa_pg import db
-from pymercure.utils import cachedf
 
 from rework.schema import init as rework_init
 from rework import api
@@ -73,9 +72,6 @@ def webapp(engine):
 @pytest.fixture
 def client(engine):
     return NonSuckingWebTester(webapp(engine))
-
-
-dfcache = cachedf(DATADIR)
 
 
 # HTTP tests
