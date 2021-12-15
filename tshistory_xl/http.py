@@ -124,7 +124,7 @@ class XLClient(Client):
 
         if res.status_code == 200:
             return [
-                util.fromjson(item, name, tzaware=self.metadata(name))
+                util.fromjson(item, name, tzaware=self.metadata(name, all=True)['tzaware'])
                 if item else item
                 for item in res.json()
             ]
