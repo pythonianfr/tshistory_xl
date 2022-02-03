@@ -1,11 +1,11 @@
 from tshistory.util import ensuretz, extend
 from tshistory.api import (
     altsources,
-    dbtimeseries
+    mainsource
 )
 
 
-@extend(dbtimeseries)
+@extend(mainsource)
 def values_markers_origins(
         self,
         name,
