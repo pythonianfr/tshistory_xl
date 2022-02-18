@@ -47,14 +47,14 @@ class timeseries(supervisionts, formulats):
             # now we must take care of the priority formula
             # in this case: we need to compute the origins
             formula = formula.replace('(priority', '(priority-origin', 1)
-            i = interpreter.Interpreter(
-                cn, self, {
-                    'revision_date': revision_date,
-                    'from_value_date': from_value_date,
-                    'to_value_date':to_value_date
-                }
-            )
-            ts_values, ts_origins = i.evaluate(lisp.parse(formula))
+            kw = {
+                'revision_date': revision_date,
+                'from_value_date': from_value_date,
+                'to_value_date': to_value_date
+            }
+            i = interpreter.Interpreter(cn, self, kw)
+            expanded = self._expanded_formula(cn, formula, qargs=kw)
+            ts_values, ts_origins = i.evaluate(expanded)
             ts_values.name = name
             ts_origins.name = name
             return ts_values, ts_marker, ts_origins
