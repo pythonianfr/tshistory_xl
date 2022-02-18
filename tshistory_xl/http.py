@@ -12,16 +12,25 @@ from flask_restx import (
 
 from tshistory import util
 from tshistory.http.client import (
-    Client,
     strft,
     unwraperror
 )
-from tshistory.http.server import httpapi
 from tshistory.http.util import (
     enum,
     onerror,
     utcdt
 )
+
+from tshistory_supervision.http import (
+    supervision_httpapi,
+    SupervisionClient
+)
+
+from tshistory_formula.http import (
+    formula_httpapi,
+    FormulaClient
+)
+
 
 base = reqparse.RequestParser()
 base.add_argument(
@@ -50,7 +59,8 @@ xl.add_argument(
 )
 
 
-class xl_httpapi(httpapi):
+class xl_httpapi(supervision_httpapi, formula_httpapi):
+    __slots__ = 'tsa', 'bp', 'api', 'nss', 'nsg'
 
     def routes(self):
         super().routes()
@@ -94,7 +104,7 @@ class xl_httpapi(httpapi):
                 return resp
 
 
-class XLClient(Client):
+class XLClient(SupervisionClient, FormulaClient):
 
     def __repr__(self):
         return f"tshistory-xl-http-client(uri='{self.uri}')"
