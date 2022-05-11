@@ -1,4 +1,4 @@
-import os
+import sys
 from pathlib import Path
 from setuptools import setup
 
@@ -16,7 +16,7 @@ deps = [
     'tshistory_supervision'
 ]
 
-if os.name == 'nt':
+if sys.platform in ('darwin', 'win32'):
     deps.append('xlwings ~= 0.20')
 
 
