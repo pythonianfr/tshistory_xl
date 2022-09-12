@@ -12,7 +12,8 @@ def series_priority_origin(*serieslist: pd.Series) -> pd.Series:
     final = serieslist[-1]
     origin = pd.Series(
         [final.name] * len(final.index),
-        index=final.index
+        index=final.index,
+        dtype='object'
     )
 
     for ts in reversed(serieslist[:-1]):
