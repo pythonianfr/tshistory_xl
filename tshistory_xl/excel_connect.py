@@ -348,8 +348,7 @@ def pull_prepare_zones(wb, zones):
 
 
 def extrapolate_daily(values):
-    mask = values.index.astype('int') != int(pd.NaT)
-    values = values[mask]
+    values = values[pd.notnull(values.index)]
     first_value = values[values.index == min(values.index)]
     last_value = values[values.index == max(values.index)]
     first_of_month = datetime(
@@ -401,8 +400,7 @@ def push_rolling(wb, zones):
             # turns float64 into object ...
             # hence we filter the bad values and reconstruct the serie
             name = values.name
-            goodvalues = values.index.astype('int') != int(pd.NaT)
-            values = pd.Series(values[goodvalues].to_dict())
+            values = pd.Series(values[pd.notnull(values.index)].to_dict())
             values.name = name
 
             # coerce value to numeric if possible
@@ -554,10 +552,6 @@ def pull_series(wb, zones):
     return out
 
 
-def isnat(dtindex):
-    return dtindex.astype('int') == int(pd.NaT)
-
-
 def build_zones_dataframes(wb, zones, db_series):
     zones_timestamps = pull_prepare_zones(wb, zones)
     zones_dfs = {}
@@ -606,7 +600,7 @@ def build_zones_dataframes(wb, zones, db_series):
                 origin_df[new_name] = None
 
         try:
-            data_df = data_df[~isnat(data_df.index)]
+            data_df = data_df[pd.notnull(data_df.index)]
         except TypeError:
             raise Exception('In zone %s, sheet %s the index is bogus %s' % (
                 zonename,
@@ -614,8 +608,8 @@ def build_zones_dataframes(wb, zones, db_series):
                 [str(elt) for elt in data_df.index.values])
             )
 
-        marker_df = marker_df[~isnat(marker_df.index)]
-        origin_df = origin_df[~isnat(origin_df.index)]
+        marker_df = marker_df[pd.notnull(marker_df.index)]
+        origin_df = origin_df[pd.notnull(origin_df.index)]
 
         data_df.loc[pd.NaT] = np.nan
         data_df = data_df.loc[timestamps]
@@ -665,6 +659,7 @@ def pull_rolling(wb, zones):
 
 def compress_series(ts):
     # GIF style
+    ts = ts.replace(np.nan, None)
     shifted = ts.shift(1)
     bounds = ts[1:] != shifted[1:]
     pos_index = np.where(bounds)[0]
