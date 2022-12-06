@@ -314,3 +314,28 @@ end.
 * If one change the value of series inserted by a different process,
   the rule of updating such data might surprise you at first
   look. More information [here][supervision]
+
+
+# Testing
+
+While the environment works well with recent versions of python and
+pandas, it might not work under the most recent versions of Excel
+(timedelta tests fail under V16.0). Keep that in mind whenever you're
+launching pytest.
+
+Some tests might not work especially if you haven't configured your
+local Postgres instance, since `pytest_sa_pg` requires commands from
+your local Postgres installation, like `initdb`.
+
+```shell
+# For Linux, add the following to your .profile
+export PATH=$PATH:/usr/lib/postgresql/{version_number}/bin/
+source ~/.profile
+```
+
+```powershell
+# For Windows
+[System.Environment]::SetEnvironmentVariable('path', $Env:Programfiles + ".\PostgreSQL\{version_number}\bin;" + [System.Environment]::GetEnvironmentVariable('path', "User"),"User")
+
+# Or add the variables manually through your panel
+```

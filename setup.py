@@ -16,6 +16,15 @@ deps = [
     'tshistory_supervision'
 ]
 
+dev_deps = [
+    'rework',
+    'pytest',
+    'responses',
+    'webtest',
+    'pytest_sa_pg'
+]
+
+
 if sys.platform in ('darwin', 'win32'):
     deps.append('xlwings ~= 0.20')
 
@@ -33,6 +42,9 @@ setup(name='tshistory_xl',
           'ZTSHISTORY.xlam',
       ]},
       install_requires=deps,
+      extras_require={
+          'dev': dev_deps
+      },
       entry_points={
           'tshistory.subcommands': [
               'xl-addin=tshistory_xl.cli:xl_addin',
