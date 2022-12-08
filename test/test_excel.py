@@ -70,6 +70,7 @@ XLPATH_IMPORTER = DATADIR / 'proto_importer.xlsm'
 XLPATH_PRIORITY = DATADIR / 'proto_priority.xlsx'
 XLPATH_SELECT = DATADIR / 'proto_select_name.xlsx'
 XLPATH_DELTA = DATADIR / 'proto_delta.xlsx'
+XLPATH_XLWINGS_BUG = DATADIR / 'xlwings_bug.xlsx'
 
 HERE = Path(__file__).parent
 
@@ -957,7 +958,17 @@ def test_empty_ts(engine, tsh, excel):
 
 
 @skipnoxlwing
-@recentxlsversion
+def test_xlwings_bug(excel):
+    import datetime
+    with xlbook(XLPATH_XLWINGS_BUG) as xl_bug:
+        sheet = xl_bug.sheets[0]
+        timestamps = sheet["A2:A33"].options(ndim=1).value
+        assert timestamps[1] == datetime.datetime(2015, 1, 1, 0, 0)
+        assert timestamps[3] == datetime.datetime(2015, 1, 1, 1, 59, 59, 990000)
+
+
+@skipnoxlwing
+# @recentxlsversion
 def test_delta_excel(engine, tsh, excel):
     ingest_formulas(tsh, engine,  DATADIR / 'formula_definitions.csv')
 
