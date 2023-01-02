@@ -30,7 +30,7 @@ if sys.platform in ('darwin', 'win32'):
 
 
 setup(name='tshistory_xl',
-      version='0.5.0',
+      version='0.5.1',
       author='Pythonian',
       author_email='arnaud.campeas@pythonian.fr, aurelien.campeas@pythonian.fr',
       description='Light client for excel/tshistory',
