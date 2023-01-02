@@ -26,7 +26,7 @@ dev_deps = [
 
 
 if sys.platform in ('darwin', 'win32'):
-    deps.append('xlwings = 0.28.5')
+    deps.append('xlwings == 0.28.5')
 
 
 setup(name='tshistory_xl',
