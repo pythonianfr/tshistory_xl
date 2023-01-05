@@ -81,7 +81,7 @@ skipnoxlwing = partial(
 
 
 recentxlsversion = partial(
-    pytest.mark.skipif, str(xw.App().version) == '16.0',
+    pytest.mark.skipif, xw is not None and str(xw.App().version) == '16.0',
     reason='Excel version is too recent: problem with datetime parsing'
 )
 
@@ -968,7 +968,7 @@ def test_xlwings_bug(excel):
 
 
 @skipnoxlwing
-# @recentxlsversion
+@recentxlsversion
 def test_delta_excel(engine, tsh, excel):
     ingest_formulas(tsh, engine,  DATADIR / 'formula_definitions.csv')
 
