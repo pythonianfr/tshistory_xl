@@ -1,4 +1,8 @@
+import inireader
 import requests
+
+from tshistory.http.client import get_auth
+from tshistory.util import get_cfg_path
 
 from tshistory_xl.codecs import (
     pack_getmany_request,
@@ -11,10 +15,16 @@ class HTTPClient:
     _uri = None
 
     def __init__(self, uri=None):
-        if self._uri is None:
-            self._uri = uri
+        if self._uri is None and uri:
+            self._uri = uri.strip()
         self.session = requests.Session()
         self.session.trust_env = False
+        auth = get_auth(
+            self._uri + '/api',
+            inireader.reader(get_cfg_path())
+        )
+        if 'login' in auth:
+            self.session.auth = auth['login'], auth['password']
 
     # things TimeSerie-like
     def insert_from_many(self, insertlist, author):
