@@ -6,14 +6,14 @@ from setuptools import setup
 doc = Path(__file__).parent / 'README.md'
 
 deps = [
-    'pandas',
+    'pandas > 1.0.5, <= 1.4',
     'colorlover',
     'requests',
     'python-dateutil',
     'isodate',
-    'tshistory',
-    'tshistory_formula',
-    'tshistory_supervision'
+    'tshistory >= 0.18',
+    'tshistory_formula >= 0.14',
+    'tshistory_supervision >= 0.11'
 ]
 
 dev_deps = [
@@ -30,7 +30,7 @@ if sys.platform in ('darwin', 'win32'):
 
 
 setup(name='tshistory_xl',
-      version='0.5.1',
+      version='0.6.0',
       author='Pythonian',
       author_email='arnaud.campeas@pythonian.fr, aurelien.campeas@pythonian.fr',
       description='Light client for excel/tshistory',
