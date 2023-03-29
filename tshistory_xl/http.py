@@ -1,7 +1,6 @@
 import json
 import pandas as pd
 
-import requests
 import isodate
 from flask import make_response
 
@@ -126,7 +125,7 @@ class XLClient(SupervisionClient, FormulaClient):
         if delta:
             args['delta'] = isodate(delta)
 
-        res = requests.get(
+        res = self.session.get(
             f'{self.uri}/series/xl', params=args
         )
         if res.status_code == 404:
