@@ -6,7 +6,7 @@ from setuptools import setup
 doc = Path(__file__).parent / 'README.md'
 
 deps = [
-    'pandas > 1.0.5, <= 1.4',
+    'pandas > 1.0.5, < 1.6',
     'colorlover',
     'requests',
     'python-dateutil',
