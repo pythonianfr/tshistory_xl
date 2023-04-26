@@ -1,0 +1,31 @@
+image: debian/bullseye
+packages:
+  - mercurial
+  - python3-pip
+  - postgresql
+  - emacs-nox
+sources:
+  - hg+ssh://hg@hg.sr.ht/~pythonian/tshistory
+  - hg+ssh://hg@hg.sr.ht/~pythonian/tshistory_supervision
+  - hg+ssh://hg@hg.sr.ht/~pythonian/tshistory_formula
+  - hg+ssh://hg@hg.sr.ht/~pythonian/rework
+  - hg+ssh://hg@hg.sr.ht/~pythonian/tshistory_xl
+secrets:
+  -  2697538f-6b29-4af7-9fb2-e17694886c3f
+tasks:
+  - install: |
+      export PATH=$PATH:~/.local/bin:/usr/lib/postgresql/13/bin
+      pip3 install pandas==1.5.3
+      pip3 install numpy==1.23.4
+      pip3 install pip --upgrade
+      pip install tox wheel setuptools webtest pytest_sa_pg pystuck --quiet
+      pip install -e tshistory --prefer-binary
+      pip install -e tshistory_supervision --prefer-binary
+      pip install -e tshistory_formula --prefer-binary
+      pip install -e rework --prefer-binary
+      pip install -e tshistory_xl --prefer-binary
+  - run-tests: |
+      export PATH=$PATH:~/.local/bin:/usr/lib/postgresql/13/bin
+      pip3 install pytest pytest_sa_pg responses
+      cd tshistory_xl
+      pytest
