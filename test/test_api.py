@@ -37,7 +37,7 @@ def tsa1(engine):
     tsa = make_api(
         engine,
         'test-api',
-        [(str(engine.url), 'test-remote')]
+        {'remote': (str(engine.url), 'test-remote')}
     )
 
     return tsa
