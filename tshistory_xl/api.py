@@ -37,7 +37,7 @@ def values_markers_origins(
 
 
 @extend(altsources)
-def values_markers_origins(
+def values_markers_origins(  # noqa: F811
         self,
         name,
         revision_date=None,

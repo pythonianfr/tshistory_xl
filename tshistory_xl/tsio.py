@@ -4,12 +4,12 @@ from tshistory_formula import interpreter
 
 # registration
 import tshistory_formula.funcs
-import tshistory_formula.api
+import tshistory_formula.api  # noqa: F401
 
-import tshistory_supervision.api
+import tshistory_supervision.api  # noqa: F401
 
 import tshistory_xl.api
-import tshistory_xl.funcs
+import tshistory_xl.funcs  # noqa: F401
 
 
 class timeseries(supervisionts, formulats):
