@@ -30,7 +30,6 @@ def yield_engine(dburi):
 
 def blueprint(tsa):
     bp = Blueprint('xlapi', __name__)
-    dburi = str(tsa.engine.url)
 
     @bp.route('/insert_from_many', methods=['PATCH'])
     def insert_from_many():

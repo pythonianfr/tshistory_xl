@@ -1,5 +1,3 @@
-from psyl import lisp
-
 from tshistory_supervision.tsio import timeseries as supervisionts
 from tshistory_formula.tsio import timeseries as formulats
 from tshistory_formula import interpreter

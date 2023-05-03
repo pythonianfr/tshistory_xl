@@ -1,5 +1,4 @@
 import json
-import pandas as pd
 
 import isodate
 from flask import make_response
@@ -15,7 +14,6 @@ from tshistory.http.client import (
     unwraperror
 )
 from tshistory.http.util import (
-    enum,
     onerror,
     utcdt
 )
@@ -67,7 +65,6 @@ class xl_httpapi(supervision_httpapi, formula_httpapi):
         tsa = self.tsa
         api = self.api
         nss = self.nss
-        nsg = self.nsg
 
         @nss.route('/xl')
         class series_xl(Resource):

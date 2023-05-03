@@ -136,9 +136,6 @@ def parse_df(wb, zones, sheetname=None, index=False):
             continue
         sheet = wb.sheets[sheet_from_dico]
         coord = zones[name]
-        if 'index' in name:
-            # DEAD CODE (?)
-            data_extract = data_extract.set_index(0)
         if index:
             extract = sheet.range((coord['top'], coord['left'] - 1),
                                  (coord['down'], coord['right'])).value
@@ -930,8 +927,6 @@ def test_find_zone():
     with xlbook(XLPATH_SELECT) as wb:
         # we didnt't touch the excel test files
         # from the time the default exclusion term was 'request'
-        exclude_word = 'request'
-
         zones = find_zones_having_keyword(wb, [PULL], sheetname='tab1')
         assert {
             'rwc_custom1', 'rwc_request_tab1', 'rwc_custom2'

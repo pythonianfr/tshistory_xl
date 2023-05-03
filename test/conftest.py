@@ -10,9 +10,6 @@ from flask import Flask
 
 from pytest_sa_pg import db
 
-from rework.schema import init as rework_init
-from rework import api
-
 from tshistory.schema import tsschema
 from tshistory_formula.schema import formula_schema
 
