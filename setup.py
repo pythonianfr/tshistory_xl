@@ -2,6 +2,8 @@ import sys
 from pathlib import Path
 from setuptools import setup
 
+from tshistory_xl import __version__
+
 
 doc = Path(__file__).parent / 'README.md'
 
@@ -30,7 +32,7 @@ if sys.platform in ('darwin', 'win32'):
 
 
 setup(name='tshistory_xl',
-      version='0.6.0',
+      version=__version__,
       author='Pythonian',
       author_email='arnaud.campeas@pythonian.fr, aurelien.campeas@pythonian.fr',
       description='Light client for excel/tshistory',
