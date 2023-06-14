@@ -23,6 +23,8 @@ def _initschema(engine, ns='tsh'):
 
 def make_api(engine, ns, sources=()):
     _initschema(engine, ns)
+    for _uri, sns in sources.values():
+        _initschema(engine, sns)
 
     return api.timeseries(
         str(engine.url),
