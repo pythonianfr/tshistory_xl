@@ -57,7 +57,8 @@ def tsa2(engine):
     return api.timeseries(
         dburi,
         namespace=ns,
-        handler=tsio.timeseries
+        handler=tsio.timeseries,
+        sources={}
     )
 
 
