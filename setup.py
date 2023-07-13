@@ -52,6 +52,12 @@ setup(name='tshistory_xl',
               'xl-addin=tshistory_xl.cli:xl_addin',
               'xl=tshistory_xl.cli:xl',
           ],
+          'tshclass': [
+              'tshclass=tshistory_refinery.tsio:timeseries'
+          ],
+          'httpclient': [
+              'httpclient=tshistory_xl.http:xl_httpclient'
+          ]
       },
       classifiers=[
           'Development Status :: 4 - Beta',

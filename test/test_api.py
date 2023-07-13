@@ -66,7 +66,7 @@ tsx = make_tsx(
     _initschema,
     tsio.timeseries,
     http.xl_httpapi,
-    http.XLClient,
+    http.xl_httpclient,
     with_http_bridge=with_http_bridge
 )
 

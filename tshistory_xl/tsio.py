@@ -13,6 +13,7 @@ import tshistory_xl.funcs  # noqa: F401
 
 
 class timeseries(supervisionts, formulats):
+    index = 2
     _forbidden_chars = ' (),;=[]'
     metadata_compat_excluded = ('supervision_status',)
 

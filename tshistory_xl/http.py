@@ -20,12 +20,12 @@ from tshistory.http.util import (
 
 from tshistory_supervision.http import (
     supervision_httpapi,
-    SupervisionClient
+    supervision_httpclient
 )
 
 from tshistory_formula.http import (
     formula_httpapi,
-    FormulaClient
+    formula_httpclient
 )
 
 
@@ -100,7 +100,7 @@ class xl_httpapi(supervision_httpapi, formula_httpapi):
                 return resp
 
 
-class XLClient(SupervisionClient, FormulaClient):
+class xl_httpclient(supervision_httpclient, formula_httpclient):
 
     def __repr__(self):
         return f"tshistory-xl-http-client(uri='{self.uri}')"
