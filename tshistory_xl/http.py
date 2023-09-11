@@ -101,6 +101,7 @@ class xl_httpapi(supervision_httpapi, formula_httpapi):
 
 
 class xl_httpclient(supervision_httpclient, formula_httpclient):
+    index = 2
 
     def __repr__(self):
         return f"tshistory-xl-http-client(uri='{self.uri}')"
