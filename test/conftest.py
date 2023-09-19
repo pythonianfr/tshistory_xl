@@ -57,7 +57,8 @@ def webapp(engine):
     from tshistory.api import timeseries
     tsa = timeseries(
         str(engine.url),
-        handler=tsio.timeseries
+        handler=tsio.timeseries,
+        sources={}
     )
     APP.register_blueprint(
         blueprint(tsa)
