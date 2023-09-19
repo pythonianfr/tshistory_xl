@@ -718,7 +718,7 @@ def update_workbook(wb, zones, db_series):
         # origin
         for idx_col in range(origin_df.shape[1]):
             origines = origin_df.iloc[:, idx_col]
-            col_marker = marker_df.iloc[:, idx_col]
+            col_marker = marker_df.iloc[:, idx_col].astype('bool')
             if len(np.unique(origines[(~origines.isnull())])) < 2:
                 if not col_marker.any():
                     continue
