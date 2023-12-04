@@ -18,9 +18,6 @@ def series_priority_origin(*serieslist: pd.Series) -> pd.Series:
 
     for ts in reversed(serieslist[:-1]):
         assert ts.dtype != 'O'
-        prune = ts.options.get('prune')
-        if prune:
-            ts = ts[:-prune]
         final = patch(final, ts)
 
         # origin
