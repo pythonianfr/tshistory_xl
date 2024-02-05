@@ -15,6 +15,7 @@ from tshistory.http.client import (
 )
 from tshistory.http.util import (
     onerror,
+    required_roles,
     utcdt
 )
 
@@ -71,6 +72,7 @@ class xl_httpapi(supervision_httpapi, formula_httpapi):
 
             @api.expect(xl)
             @onerror
+            @required_roles('admin', 'rw', 'ro')
             def get(self):
                 args = xl.parse_args()
                 if not tsa.exists(args.name):
