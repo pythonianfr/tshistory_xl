@@ -538,10 +538,10 @@ def test_origin_federated(tsa1, tsa2):
 """, origin)
 
 
-def test_today_vs_revision_date(tsx):
+def test_now_vs_revision_date(tsx):
     tsx.register_formula(
         'constant-1',
-        '(constant 1. (date "2020-1-1") (today) "D" (date "2020-2-1"))'
+        '(constant 1. (date "2020-1-1") (now) "D" (date "2020-2-1"))'
     )
 
     ts, _, _ = tsx.values_markers_origins(
