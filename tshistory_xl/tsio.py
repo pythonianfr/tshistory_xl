@@ -14,20 +14,7 @@ import tshistory_xl.funcs  # noqa: F401
 
 class timeseries(supervisionts, formulats):
     index = 2
-    _forbidden_chars = ' (),;=[]'
     metadata_compat_excluded = ('supervision_status',)
-
-    def update(self, cn, ts, name, author,
-               metadata=None,
-               insertion_date=None,
-               manual=False):
-        name = self._sanitize(name)
-        return super().update(
-            cn, ts, name, author,
-            metadata=metadata,
-            insertion_date=insertion_date,
-            manual=manual
-        )
 
     def get_many(self, cn, name,
                  revision_date=None,
@@ -80,8 +67,3 @@ class timeseries(supervisionts, formulats):
                 to_value_date=to_value_date
             )
         return ts_values, ts_marker, ts_origins
-
-    def _sanitize(self, name):
-        for char in self._forbidden_chars:
-            name = name.replace(char, '')
-        return name
