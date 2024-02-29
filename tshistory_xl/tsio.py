@@ -39,7 +39,9 @@ class timeseries(supervisionts, formulats):
                 'to_value_date': to_value_date
             }
             i = interpreter.Interpreter(cn, self, kw)
-            expanded = self._expanded_formula(cn, formula, qargs=kw)
+            expanded = self._expanded_formula(
+                cn, formula, display=False, remote=False, qargs=kw
+            )
             ts_values, ts_origins = i.evaluate(expanded)
             ts_values.name = name
             ts_origins.name = name
