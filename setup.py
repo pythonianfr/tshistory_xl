@@ -8,14 +8,14 @@ from tshistory_xl import __version__
 doc = Path(__file__).parent / 'README.md'
 
 deps = [
-    'pandas > 1.0.5, < 1.6',
+    'pandas > 1.0.5, < 2.3',
     'colorlover',
     'requests',
     'python-dateutil',
     'isodate',
-    'tshistory >= 0.18',
-    'tshistory_formula >= 0.14',
-    'tshistory_supervision >= 0.11'
+    'tshistory',
+    'tshistory_formula',
+    'tshistory_supervision'
 ]
 
 dev_deps = [
