@@ -371,7 +371,7 @@ def extrapolate_daily(values):
             end=last_of_month, freq='D'
         )
     )
-    for cell in values.iteritems():
+    for cell in values.items():
         extrapole[str(cell[0].year) + '-' + str(cell[0].month)] = cell[1]
     return extrapole
 
