@@ -9,7 +9,7 @@ from tshistory_xl import codecs
 def test_pack_unpack_insert():
     series = pd.Series(
         [1., 2., 3.],
-        index=pd.date_range(utcdt(2020, 1, 1), freq='H', periods=3)
+        index=pd.date_range(utcdt(2020, 1, 1), freq='h', periods=3)
     )
 
     packed = codecs.pack_insert_series(
@@ -35,11 +35,11 @@ def test_pack_unpack_insert():
 def test_pack_unpack_getmany():
     series = pd.Series(
         [1., 2., 3.],
-        index=pd.date_range(utcdt(2020, 1, 1), freq='H', periods=3)
+        index=pd.date_range(utcdt(2020, 1, 1), freq='h', periods=3)
     )
     markers = pd.Series(
         [True, False, True],
-        index=pd.date_range(utcdt(2020, 1, 1), freq='H', periods=3)
+        index=pd.date_range(utcdt(2020, 1, 1), freq='h', periods=3)
     )
     output = [
         ('zone', 'forecast', pd.Timestamp('2020-1-1'),
