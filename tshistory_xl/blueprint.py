@@ -43,7 +43,8 @@ def blueprint(tsa):
                     series.name,
                     series,
                     author=author,
-                    manual=True
+                    manual=True,
+                    keepnans=True
                 )
             except Exception as err:
                 errors.append((series.name, err))
