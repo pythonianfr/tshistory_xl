@@ -4,13 +4,12 @@
 
 This is an Excel client for [tshistory][tshistory].
 
-## Removing the old versions
+* If you want to install the Xlwings only client from scratch, follow 1)
+* If you want to install the PyXLL client from scratch, follow 3)
+* If you want to upgrade the Xlwings only to the PyXLL one follow 2) then 3)
+* If you want to revert to the Xlwings from the PyXLL one follow 4) then 1)
 
-```sh
-pip uninstall xl_data_hub
-```
-
-## Installation
+## 1) Install Xlwings client (recommanded)
 
 ```sh
 pip install tshistory_xl
@@ -36,10 +35,130 @@ In Excel you should see two new tabs: `xlwings` and `Saturn`.
 [supervision]: https://hg.sr.ht/~pythonian/tshistory_supervision
 [formula]: https://hg.sr.ht/~pythonian/tshistory_formula
 
-If you have to uninstall the old proprietary version, do
+## 2) Uninstall Xlwings client
+
+Just type
 
 ```sh
-tsh xl-addin uninstall-any --name ZATURN.xlam
+$ tsh xl-addin uninstall
+```
+
+## 3) Install PyXLL client
+### Installing Refinery Excel add-in
+Once your package in installed (`pip install tshistory_xl`) just type the following command:
+`tsh xl-addin install --pyxll`
+
+## Installing PyXLL
+
+### Python package
+
+[References][pyxll]
+
+```sh
+pip install pyxll
+```
+
+### Excel add-in
+
+```sh
+pyxll install
+```
+
+Respond to the interactive prompt.
+In case of doubt, use the proposed default option.
+
+
+* Note carefully where the files will be installed, especially
+the  **pyxll.cfg** file. You can keep the default location.
+* To activate the free 30 day trial when the installer asks
+“Do you have a PyXLL license key?” enter “n”. This will install
+PyXLL without a license key, activating the 30 day free trial
+automatically. After the 30 days trial, you will have to buy
+a subscription here:  https://www.pyxll.com/pricing.html
+
+### Configuration of PyXLL
+
+Edit the **pyxll.cfg** file
+
+This file is highly documented, you might want to read it extensively if
+you want to explore the PyXLL options.
+
+Here are the section that must be completed:
+```sh
+[PYTHON]
+executable =
+```
+
+
+make sure that it points on the executable python you want to use for this operation
+(i.e. in the correct conda-env)
+
+
+You must also specify the pythonpath which point to the tshistory_xl package.
+You  are encouraged to keep the `examples` section that will produce a PyXLL tab in Excel
+with a lot of usefull options (logs and reload button)
+
+```sh
+pythonpath = c:/<the-path-to the python package tshsitory_xl>
+            ./examples
+```
+---
+Note: to be sure to know where this package is installed, you can use the
+interactive python console as follows:
+
+```sh
+> python
+
+> import tshistory_xl
+> tshistory_xl.__file__
+```
+
+You will get a path like this:
+
+
+`C:\\Users\\<user-name>\\miniconda3\\Lib\\site-packages\\tshistory_xl\\tshistory_xl\\__init__`.py
+
+
+Remove the __init__.py and past this string as the pythonpath
+
+---
+```sh
+[PYXLL]
+modules = …
+          macros
+          error_handler
+```
+
+Just add **macros** and **error_handler** to the list
+
+```sh
+error_handler = error_handler.error_handler
+```
+
+The rest of the file can be left unchanged
+
+
+### Final touches:
+
+* This refinery-client explicitly uses the macro feature of excel. Make sure that
+your excel file allow it (i.e. has an .xlm suffix)
+* An error can pop at the launch of the excel file with the text:
+“Error importing ‘macros”: OpenSSL 3.0 legacy provider failed to load…”
+To avoid such error, you have to define a new environment variable set at false:
+```sh
+CRYPTOGRAPHY_OPENSSL_NO_LEGACY = 0
+```
+
+In Excel you should see two new tabs: `PyXLL Example tab` and `Ts-Refinery`
+(instead of Saturn).
+
+
+## 4) Uninstall PyXLL client
+
+Just type
+
+```sh
+$ tsh xl-addin uninstall --pyxll
 ```
 
 ## Base use
