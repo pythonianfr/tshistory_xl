@@ -13,7 +13,7 @@ from tshistory.schema import tsschema
 from tshistory_formula.schema import formula_schema
 
 from tshistory_xl.testutil import with_http_bridge
-from tshistory_xl import tsio, http
+from tshistory_xl import tsio, http_xl
 
 
 def _initschema(engine, ns='tsh'):
@@ -66,8 +66,8 @@ tsx = make_tsx(
     'http://test.me',
     _initschema,
     tsio.timeseries,
-    http.xl_httpapi,
-    http.xl_httpclient,
+    http_xl.xl_httpapi,
+    http_xl.xl_httpclient,
     with_http_bridge=with_http_bridge
 )
 

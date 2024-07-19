@@ -56,7 +56,7 @@ setup(name='tshistory_xl',
               'tshclass=tshistory_refinery.tsio:timeseries'
           ],
           'httpclient': [
-              'httpclient=tshistory_xl.http:xl_httpclient'
+              'httpclient=tshistory_xl.http_xl:xl_httpclient'
           ]
       },
       classifiers=[
