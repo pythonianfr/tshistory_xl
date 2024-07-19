@@ -42,6 +42,7 @@ setup(name='tshistory_xl',
       zip_safe=False,
       package_data={'tshistory_xl': [
           'ZTSHISTORY.xlam',
+          'zts-refinery.xlam'
       ]},
       install_requires=deps,
       extras_require={

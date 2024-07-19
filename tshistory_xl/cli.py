@@ -15,19 +15,26 @@ from tshistory_xl.excel_connect import (
 
 # Directories/paths
 XLAM = Path(__file__).parent / 'ZTSHISTORY.xlam'
+PYXLL_XLAM = Path(__file__).parent / 'zts-refinery.xlam'
 
 if sys.platform.startswith('win'):
     ADDINPATH = Path(os.getenv('APPDATA')) / 'Microsoft'/ 'Excel'/ 'XLSTART'
 
 
-def addin_install():
+def addin_install(pyxll):
+    if not pyxll:
+        current_path = XLAM
+        target_path = ADDINPATH / 'ZTSHISTORY.xlam'
+    else:
+        current_path = PYXLL_XLAM
+        target_path = ADDINPATH / 'zts-refinery.xlam'
     if not sys.platform.startswith('win'):
         print('Cannot install the addin automatically on Mac. ')
         print('Install it via Tools > Excel Add-ins...')
         print(f'You find the addin here: {XLAM}')
     else:
         try:
-            shutil.copyfile(XLAM, ADDINPATH / 'ZTSHISTORY.xlam')
+            shutil.copyfile(current_path, target_path)
             print(
                 'Successfully installed the tshistory_xl add-in! '
                 'Please restart Excel.'
@@ -42,13 +49,19 @@ def addin_install():
             print(str(e))
 
 
-def addin_remove(name='ZTSHISTORY.xlam'):
+def addin_remove(name, pyxll):
+    if not pyxll:
+        target_path = ADDINPATH / 'ZTSHISTORY.xlam'
+    else:
+        target_path = ADDINPATH / 'zts-refinery.xlam'
+    if name is not None:
+        target_path = ADDINPATH / name
     if not sys.platform.startswith('win'):
         print('Error: This command is not available on Mac. '
               'Please remove the addin manually.')
     else:
         try:
-            os.remove(ADDINPATH / name)
+            os.remove(target_path)
             print('Successfully removed the tshistory_xl add-in!')
         except WindowsError as e:
             if e.args[0] == 32:
@@ -67,11 +80,12 @@ def addin_remove(name='ZTSHISTORY.xlam'):
 @click.argument('action',
                 type=click.Choice(['install', 'uninstall', "uninstall-any"]))
 @click.option('--name')
-def xl_addin(action, name=None):
+@click.option('--pyxll', is_flag=True, default=False)
+def xl_addin(action, name=None, pyxll=False):
     if action == 'install':
-        addin_install()
+        addin_install(pyxll)
     elif action == 'uninstall':
-        addin_remove()
+        addin_remove(name=None, pyxll=pyxll)
     elif action == 'uninstall-any':
         if name is None:
             raise Exception('An excel addin name must be given')
