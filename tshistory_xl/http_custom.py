@@ -2,7 +2,7 @@ import inireader
 import requests
 
 from tshistory.http.client import get_auth
-from tshistory.util import get_cfg_path
+from tshistory.config import configuration
 
 from tshistory_xl.codecs import (
     pack_getmany_request,
@@ -19,10 +19,7 @@ class HTTPClient:
             self._uri = uri.strip()
         self.session = requests.Session()
         self.session.trust_env = False
-        auth = get_auth(
-            self._uri + '/api',
-            inireader.reader(get_cfg_path())
-        )
+        auth = configuration().auth(self._uri + '/api')
         if 'login' in auth:
             self.session.auth = auth['login'], auth['password']
 
