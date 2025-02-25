@@ -1,7 +1,5 @@
-import inireader
 import requests
 
-from tshistory.http.client import get_auth
 from tshistory.config import configuration
 
 from tshistory_xl.codecs import (
