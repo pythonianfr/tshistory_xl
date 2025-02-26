@@ -4,7 +4,7 @@ import datetime
 
 import isodate
 import pandas as pd
-from tshistory import util
+from tshistory import codecs
 
 
 # the excel client works under the following assumption
@@ -31,7 +31,7 @@ def buildmeta(bvtype):
 
 def buildseries(bname, bindex, bvalues, bvtype):
     meta = buildmeta(bvtype)
-    index, values = util.numpy_deserialize(
+    index, values = codecs.numpy_deserialize(
         bindex, bvalues, meta
     )
     return pd.Series(
@@ -47,7 +47,7 @@ def serialize_series(series):
             b'', b'', b''
         )
     bvdtype = series.dtype.name.encode('utf-8')
-    bindex, bvalues = util.numpy_serialize(
+    bindex, bvalues = codecs.numpy_serialize(
         series,
         bvdtype == b'object'
     )
@@ -66,11 +66,11 @@ def pack_insert_series(author, seriesgroup):
         out.append(bvtype)
         out.append(bindex)
         out.append(bvalues)
-    return zlib.compress(util.nary_pack(*out))
+    return zlib.compress(codecs.nary_pack(*out))
 
 
 def unpack_insert_series(bytestr):
-    byteslist = util.nary_unpack(zlib.decompress(bytestr))
+    byteslist = codecs.nary_unpack(zlib.decompress(bytestr))
     author = byteslist[0].decode('utf-8')
     iterbseries = zip(*[iter(byteslist[1:])] * 4)
     series = []
@@ -103,12 +103,12 @@ def pack_getmany_request(querylist):
     byteslist = []
     for query in querylist:
         byteslist.append(json.dumps(query, cls=MoreJson).encode('utf-8'))
-    return zlib.compress(util.nary_pack(*byteslist))
+    return zlib.compress(codecs.nary_pack(*byteslist))
 
 
 def unpack_getmany_request(querybytes):
     out = []
-    for item in util.nary_unpack(zlib.decompress(querybytes)):
+    for item in codecs.nary_unpack(zlib.decompress(querybytes)):
         item = json.loads(item)
         subquery = item[2]
         for attr in ('from_value_date', 'to_value_date', 'revision_date'):
@@ -133,12 +133,12 @@ def pack_getmany(manyseries):
             out.append(bvtype)
             out.append(bindex)
             out.append(bvalues)
-    return zlib.compress(util.nary_pack(*out))
+    return zlib.compress(codecs.nary_pack(*out))
 
 
 def unpack_getmany(compressedbytes):
     out = []
-    byteslist = util.nary_unpack(zlib.decompress(compressedbytes))
+    byteslist = codecs.nary_unpack(zlib.decompress(compressedbytes))
     iterbytes = zip(*[iter(byteslist)] * 12)
     for bzone, bname, bdate, btyp1, bi1, bv1, btyp2, bi2, bv2, btyp3, bi3, bv3 in iterbytes:
         base = buildseries(b'base', bi1, bv1, btyp1)
