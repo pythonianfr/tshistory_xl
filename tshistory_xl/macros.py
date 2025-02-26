@@ -1,4 +1,4 @@
-from pyxll import xl_macro, xl_app
+from pyxll import xl_macro, xl_app  # type: ignore
 from tshistory_xl.excel_connect import (
     macro_pull_all,
     macro_push_all,
