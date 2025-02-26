@@ -7,7 +7,8 @@ from tshistory import api
 from tshistory.testutil import (
     assert_df,
     genserie,
-    make_tsx
+    make_tsx,
+    tempconfig
 )
 from tshistory.schema import tsschema
 from tshistory_formula.schema import formula_schema
@@ -37,13 +38,16 @@ def make_api(engine, ns, sources=()):
 
 @pytest.fixture(scope='session')
 def tsa1(engine):
-    tsa = make_api(
-        engine,
-        'test-api',
-        {'remote': (str(engine.url), 'test-remote')}
-    )
-
-    return tsa
+    config = (
+        f'[dburi]\n'
+        f'test = {str(engine.url)}\n'
+    ).encode()
+    with tempconfig(config):
+        yield make_api(
+            engine,
+            'test-api',
+            {'remote': (str(engine.url), 'test-remote')}
+        )
 
 
 @pytest.fixture(scope='session')
