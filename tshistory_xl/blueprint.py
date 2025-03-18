@@ -1,6 +1,5 @@
 import time
 import traceback as tb
-from contextlib import contextmanager
 
 from flask import (
     Blueprint,
@@ -8,7 +7,6 @@ from flask import (
     request,
 )
 
-from sqlalchemy import create_engine
 from tshistory.util import threadpool
 
 from tshistory_xl.codecs import (
@@ -19,13 +17,6 @@ from tshistory_xl.codecs import (
 
 
 NTHREAD = 16
-
-
-@contextmanager
-def yield_engine(dburi):
-    engine = create_engine(dburi, pool_size=NTHREAD)
-    yield engine
-    engine.dispose()
 
 
 def blueprint(tsa):

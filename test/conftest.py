@@ -4,7 +4,7 @@ from functools import partial
 
 import pytest
 import responses
-from sqlalchemy import create_engine
+from sqlhelp.pgapi import pgdb as create_engine
 import webtest
 from flask import Flask
 
