@@ -443,7 +443,7 @@ pandas, it might not work under the most recent versions of Excel
 launching pytest.
 
 Some tests might not work especially if you haven't configured your
-local Postgres instance, since `pytest_sa_pg` requires commands from
+local Postgres instance, since `sqlhelp` requires commands from
 your local Postgres installation, like `initdb`.
 
 ```shell

@@ -23,7 +23,6 @@ dev_deps = [
     'pytest',
     'responses',
     'webtest',
-    'pytest_sa_pg'
 ]
 
 

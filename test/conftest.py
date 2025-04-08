@@ -5,10 +5,9 @@ from functools import partial
 import pytest
 import responses
 from sqlhelp.pgapi import pgdb as create_engine
+from sqlhelp.testutil import setup_local_pg_cluster
 import webtest
 from flask import Flask
-
-from pytest_sa_pg import db
 
 from tshistory.schema import tsschema
 from tshistory_formula.schema import formula_schema
@@ -23,7 +22,7 @@ DATADIR = Path(__file__).parent / 'data'
 @pytest.fixture(scope='session')
 def engine(request):
     port = 5433
-    db.setup_local_pg_cluster(request, DATADIR, port)
+    setup_local_pg_cluster(request, DATADIR, port)
     uri = 'postgresql://localhost:{}/postgres'.format(port)
     e = create_engine(uri)
     tsschema('tsh').create(e)
