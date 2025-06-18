@@ -1,6 +1,12 @@
 import requests
 
 from tshistory.config import configuration
+from tshistory.http.util import get_auth
+from tshistory.http.client import (
+    oauth2_auth,
+    pkce_auth,
+)
+
 
 from tshistory_xl.codecs import (
     pack_getmany_request,
@@ -17,9 +23,14 @@ class HTTPClient:
             self._uri = uri.strip()
         self.session = requests.Session()
         self.session.trust_env = False
-        auth = configuration().auth(self._uri + '/api')
+        cfg = configuration()
+        auth = get_auth(self._uri + '/api', cfg)
         if 'login' in auth:
             self.session.auth = auth['login'], auth['password']
+        elif 'pkce' in auth:
+            self.session.auth = pkce_auth(uri, auth)
+        elif 'client_id' in auth:
+            self.session.auth = oauth2_auth(auth)
 
     # things TimeSerie-like
     def insert_from_many(self, insertlist, author):
