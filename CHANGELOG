@@ -1,0 +1,174 @@
+# Changelog
+
+## [Unreleased]
+
+### Added
+- excel function check_path for debugging paths
+- openid authentication support
+
+### Changed
+- replaced sqlalchemy with sqlhelp for database operations
+- tests now use sqlhelp for postgresql cluster management
+- updated pandas compatibility to version 2.3
+
+### Fixed
+- authentication brokenness
+
+## [0.9.0] - 2025-02-26
+
+### Added
+- api/exists: new method to check series existence
+- api/strip: new method to strip series data
+- support for client connection configuration
+
+### Changed
+- improved error handling with dedicated exception types
+- migrate from saturn references to refinery
+- updated dependencies and compatibility
+
+### Fixed
+- http custom api registration
+- api compatibility with latest tshistory
+
+## [0.8.0] - 2024-09-04
+
+### Added
+- required roles on http routes for security
+- pyproject.toml configuration
+- pandas 2 compatibility
+
+### Changed
+- stop mangling series names in tsio/update (educate users instead)
+- add essential flags to _expanded_formula for evaluator
+- allow erasures in insert-from-many (explicit nan handling)
+- removed last references to saturn
+
+### Fixed
+- operators deprecation warnings
+- general deprecation warnings
+
+### Removed
+- today operator renamed to now (following tshistory_formula)
+
+## [0.7.1] - 2023-09-25
+
+### Fixed
+- pytype compatibility issues
+- typing annotations corrections
+
+## [0.7.0] - 2023-08-11
+
+### Added
+- schema registration at init-db time
+- __version__ attribute in package root
+
+### Changed
+- adapted to tshistory internal/user metadata split
+- improved test isolation
+- better error messages
+
+### Fixed
+- api compatibility with tshistory 0.19
+- test database setup
+
+## [0.6.0] - 2023-02-24
+
+### Added
+- support for tree api operations
+- formula groups support
+- metadata handling improvements
+
+### Changed
+- adapted to tshistory schema changes
+- improved test coverage
+
+### Fixed
+- http api compatibility issues
+
+## [0.5.1] - 2023-01-02
+
+### Fixed
+- packaging issues with missing files
+
+## [0.5.0] - 2022-12-26
+
+### Added
+- group support in excel interface
+- basic operations on groups
+
+### Changed
+- improved error handling
+- better integration with tshistory_refinery
+
+## [0.4.1] - 2022-10-11
+
+### Fixed
+- catalog compatibility with tshistory 0.15
+
+## [0.4.0] - 2022-06-23
+
+### Added
+- insertion_dates api support
+- metadata operations from excel
+
+### Changed
+- adapted to tshistory 0.14 api changes
+- improved excel macros
+
+### Fixed
+- date handling in excel interface
+
+## [0.3.0] - 2022-01-13
+
+### Added
+- formula support in excel
+- basic formula operations
+
+### Changed
+- migrated to pyproject.toml
+- adapted to tshistory_rest being folded into tshistory
+
+### Fixed
+- http client initialization
+
+## [0.2.1] - 2021-09-21
+
+### Fixed
+- werkzeug compatibility (pinned to version < 2)
+
+## [0.2.0] - 2020-12-11
+
+### Added
+- comprehensive documentation
+- xlwings addin instructions
+- basic web blueprint
+
+### Changed
+- improved readme with installation instructions
+- better error messages
+
+### Fixed
+- packaging to include xlam file
+
+### Removed
+- unneeded engine pool in blueprint
+
+## [0.1.1] - 2020-09-04
+
+### Fixed
+- packaging issues:
+  - missing dependencies
+  - included xlam file in distribution
+  - pypi long description
+
+### Added
+- trove classifiers
+
+## [0.1.0] - 2020-09-04
+
+### Added
+- initial excel client for tshistory
+- basic operations: get, update, delete series
+- excel macros for time series operations
+- http api integration
+- basic test suite
