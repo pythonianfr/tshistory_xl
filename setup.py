@@ -8,7 +8,7 @@ from tshistory_xl import __version__
 doc = Path(__file__).parent / 'README.md'
 
 deps = [
-    'pandas > 1.0.5, < 2.3',
+    'pandas > 1.0.5, < 2.4',
     'colorlover',
     'requests',
     'python-dateutil',
