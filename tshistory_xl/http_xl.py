@@ -70,6 +70,40 @@ class xl_httpapi(supervision_httpapi, formula_httpapi):
         @nss.route('/xl')
         class series_xl(Resource):
 
+            @api.doc(
+                responses={200: 'Got content',
+                           404: 'Does not exist'},
+                description="""Get series with values, markers, and origins
+
+Excel-optimized endpoint that returns all data in a single request: series values, manual edit markers (from supervision), and value origins (for priority formulas).
+
+**Parameters:**
+- name: series name
+- revision_date: get version at this timestamp (ISO8601, optional, default: latest)
+- from_value_date: restrict time range start (ISO8601, optional)
+- to_value_date: restrict time range end (ISO8601, optional)
+- delta: time delta for relative range (ISO8601 duration, optional)
+
+**Returns:** JSON array with three elements [values, markers, origins]
+```json
+[
+  {"2025-01-01T00:00:00+00:00": 100.5, "2025-01-02T00:00:00+00:00": 105.2},
+  {"2025-01-01T00:00:00+00:00": false, "2025-01-02T00:00:00+00:00": true},
+  {"2025-01-01T00:00:00+00:00": "source-a", "2025-01-02T00:00:00+00:00": "source-b"}
+]
+```
+
+Each element can be null if not available.
+
+**Example:**
+```
+GET /series/xl?name=temperature&from_value_date=2025-01-01
+→ [{"2025-01-01T00:00:00+00:00": 12.5, ...}, null, null]
+```
+
+**Note:** Origins are only computed for priority formulas.
+"""
+            )
             @api.expect(xl)
             @onerror
             @required_roles('admin', 'rw', 'ro')
