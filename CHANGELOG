@@ -2,6 +2,14 @@
 
 ## [Unreleased]
 
+## [0.10.1] - 2025-11-05
+
+### Fixed
+- http/doc: endpoint documentation format
+- ci: dbcache freshness
+
+## [0.10.0] - 2025-08-29
+
 ### Added
 - excel function check_path for debugging paths
 - openid authentication support
