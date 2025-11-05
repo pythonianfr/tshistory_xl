@@ -13,9 +13,9 @@ deps = [
     'requests',
     'python-dateutil',
     'isodate',
-    'tshistory',
-    'tshistory_formula',
-    'tshistory_supervision'
+    'tshistory >= 0.22.1',
+    'tshistory_formula >= 0.18.1',
+    'tshistory_supervision >= 0.15.1'
 ]
 
 dev_deps = [
